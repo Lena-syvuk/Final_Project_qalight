@@ -1,5 +1,6 @@
+import time
 
-from Exam_project_UI.page_simple_controls import PageCheckElements
+from Exam_project_UI.Pages.page_simple_controls import PageCheckElements
 
 
 class TestCheckElements:
@@ -23,13 +24,14 @@ class TestCheckElements:
         page = PageCheckElements(driver=chrome)
         page.open()
         page.select_radio_button('male')
-        page.is_radio_button_selected('male')
+        assert page.check_radio_button_is_selected('male')
 
     def test_check_box(self,chrome):
         boxes = ['Bike', 'Car']
         page = PageCheckElements(driver=chrome)
         page.open()
         page.select_check_boxes_from_list(boxes)
+        assert page.check_boxes_are_selected(boxes)
 
     def test_dropdown_menu(self,chrome):
         selected_value = 'Saab'

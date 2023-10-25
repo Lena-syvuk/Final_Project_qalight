@@ -5,6 +5,6 @@ from selenium import webdriver
 
 def chrome():
     driver = webdriver.Chrome()
-    driver.implicitly_wait(60)
+    driver.implicitly_wait(10)
     yield driver
     driver.quit()

@@ -1,6 +1,8 @@
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
+from Exam_project_UI.data.valid_email_name import email,name
+
 
 
 class PageCheckElements:
@@ -33,10 +35,10 @@ class PageCheckElements:
     # fill fields
 
     def filling_out_name_field(self):
-        self.driver.find_element(By.XPATH, self.name_field).send_keys('Lemur')
+        self.driver.find_element(By.XPATH, self.name_field).send_keys(name)
 
     def filling_out_email_field(self):
-        self.driver.find_element(By.XPATH, self.email_field).send_keys('Lemur@gmail.com')
+        self.driver.find_element(By.XPATH, self.email_field).send_keys(email)
 
     def click_email_me_button(self):
         self.driver.find_element(By.XPATH, self.Email_Me_button).click()
@@ -50,12 +52,9 @@ class PageCheckElements:
         locator = self.driver.find_element(By.XPATH, self.checkbox_radio_button_loc.format(value))
         locator.click()
 
-    def is_radio_button_selected(self, value: str):
-        radio_button = self.driver.find_element(By.XPATH, self.checkbox_radio_button_loc.format(value))
-        if radio_button.is_selected():
-            print("Radio button is selected")
-        else:
-            print("Radio button is not selected")
+    def check_radio_button_is_selected(self, value):
+        result = self.driver.find_element(By.XPATH, self.checkbox_radio_button_loc.format(value))
+        return result.is_selected()
 
     # Check Box
 
@@ -69,6 +68,14 @@ class PageCheckElements:
     def select_check_boxes_from_list(self, boxes: list):
         for box in boxes:
             self.check_folder(box)
+
+    def check_boxes_are_selected(self,boxes):
+        for box in boxes:
+            element = self.driver.find_element(By.XPATH, self.checkbox_radio_button_loc.format(box))
+            if not element.is_selected():
+                return False
+        return True
+
 
     # Dropdown
 
